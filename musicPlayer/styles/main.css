@@ -1,0 +1,207 @@
+
+html,body{
+	height: 100%;
+}
+.nav{
+	width: 75%;
+	height:100px;
+	/*background-color:#D6F460;*/
+	overflow: hidden;
+	margin: 0 auto;
+}
+.icon{
+	float: left;
+	width: 15%;
+	height: 100%;
+}
+.icon img{
+	height: 100%;
+}
+.MusicHall{
+	float: left;
+	width: 10%;
+	margin-left: 5%; 
+	height: 100px;
+	background-color:#31c27c;
+	color: white;
+	font-size: 1.5em;
+	line-height: 100px;
+	text-align: center;
+}
+.Mymusic{
+	float: left;
+	height: 100px;
+	width: 10%;
+	margin-left: 5%;
+	/*background-color:#31c27c;*/
+	font-size: 1.5em;
+	line-height: 100px;
+	text-align: center;
+}
+.search{
+	float: right;
+	width: 20%;
+	height: 36px;
+	background-color:#31c27c;
+	margin-top: 25px;
+}
+.search input{
+	height: 30px;
+	width: 70%;
+	float: left;
+}
+.search div{
+	float: right;
+	height: 36px;
+	width: 25%;
+	/*margin-left: 20px;*/
+	line-height: 36px;
+	text-align: center;
+	/*background-color: yellow;*/
+}
+.seconNav{
+	width: 50%;
+	height: 50px;
+	margin: 0 auto;
+}
+.seconNav>.rank{
+	width: 30%;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	text-align: center;
+	background-color: #31c27c;
+}
+.seconNav>.singer{
+	width: 30%;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	/*background-color: #31c27c;*/
+
+}
+.seconNav>.mv{
+	width: 30%;
+	height: 50px;
+	line-height: 50px;
+	float: right;
+	text-align: center;
+	/*background-color: #31c27c;*/
+}
+
+
+
+.main{
+	width: 100%;
+	height: 60%;
+	background-color: #f6f6f6;
+	padding-top: 30px;
+}
+.main>.con{
+	width: 75%;
+	height: 90%;
+	margin: 0 auto;
+}
+.main>.con>.left{
+	float: left;
+	width: 15%;
+	height: 100%;
+	/*background-color: #31c27c;*/
+	padding-top: 20px;
+}
+
+.main>.con>.left>.hot{
+    background-color: #31c27c;
+    height:50px;
+    line-height: 50px
+}
+.main>.con>.left>.new{
+    /*background-color: #31c27c;*/
+    height:50px;
+    line-height: 50px
+}
+.main>.con>.right{
+	float: right;
+	width: 80%;
+	height: 100%;
+	background-color: white;
+	padding-top: 20px;
+}
+.main>.con>.left div{
+	width: 85%;
+	height: 60px;
+	margin: 0 auto;
+	text-align: center;
+}
+.main>.con>.right>.song{
+	width: 90%;
+	height: 50px;
+}
+.main>.con>.right>.heading{
+	color: gray;
+	font-size: 0.8em;
+}
+.main>.con>.right>.song>.num{
+	width: 15%;
+    height: 30px;
+    float: left;
+    text-align: center;
+}
+.main>.con>.right>.song>.songName{
+	width: 45%;
+    height: 30px;
+    float: left;
+    margin-left: 20px;
+}
+.main>.con>.right>.song>.singer{
+	width: 20%;
+    height: 30px;
+    float: left;
+    margin-left: 20px;
+}
+.main>.con>.right>.song>.time{
+	width: 10%;
+    height: 30px;
+    float: left;
+    margin-left: 20px;
+}
+
+
+.main>.con>.right>.song>.songName>.text{
+	display: inline-block;
+	float: left;
+	width: 30%;
+	height: 100%;
+}
+.main>.con>.right>.song>.songName>.player{
+	float: right;
+	width: 50%;
+	height: 100%;
+}
+.main>.con>.right>.song>.songName>.player:hover{
+	background-color: gray;
+}
+.main>.con>.right>.song>.songName>.player img{
+	height: 28px;
+	cursor: pointer;
+}
+.main>.con>.right>.song>.songName>.player>.play{
+	width: 20%;
+	float: left;
+}
+.main>.con>.right>.song>.songName>.player>.add{
+	width: 20%;
+	float: left;
+	margin-left: 6.5%;
+}
+.main>.con>.right>.song>.songName>.player>.download{
+	width: 20%;
+	float: left;
+	margin-left: 6.5%;
+}
+.main>.con>.right>.song>.songName>.player>.share{
+	width: 20%;
+	float: right;
+}

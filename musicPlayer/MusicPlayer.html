@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="styles/MusicPlayer.css">
+    <style type="text/css">
+    	.main{
+    		text-align: center;
+    	}
+    	#musicname{
+    		font-size: 1.2em;
+    	}
+    </style>
+</head>
+<body>
+    <div class="main">
+    	<h1>当前歌曲</h1> <p id="musicname">Let Her  Go</p>
+    </div>
+    <div class="controle">
+    	<div class="left">
+    		<div class="pre" ><img id="pre" src="images/pre1.png"></div>
+    		<div class="s_or_p" ><img id="s_or_p" src="images/start1.png"></div>
+    		<div class="next" ><img id="next" src="images/next1.png"></div>
+    	</div>
+    	<div class="middle">
+    		<input class="progress" id="progress" type="range" min="0" max="10" step="0.1" value="0"/>
+    	</div>
+    	<div class="right">
+    		<div class="playMethod" id="order"  style="display: block;"><img src="images/order1.png"></div>
+    		<div class="playMethod" id="random" style="display: none;"><img src="images/random1.png"></div>
+    		<div class="playMethod" id="single" style="display: none;"><img src="images/single1.png"></div>
+    		<input class="sound" id="sound" type="range" min="0" max="1" step="0.1" value="0.5"/>
+    	</div>
+    </div>
+    <script type="text/javascript" src = "scripts/playMusic.js"></script>
+</body>
+</html>
