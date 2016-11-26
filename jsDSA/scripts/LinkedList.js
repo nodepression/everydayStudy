@@ -1,5 +1,5 @@
 function LinkedList(){
-	var node = function(element){
+	var Node = function(element){
 		this.element = element;
 		this.next = null;
 	};
@@ -7,7 +7,7 @@ function LinkedList(){
 	var length = 0;
 	var head = null;
 	this.append = function(element){
-    	var node = new node(element),
+    	var node = new Node(element),
     		current;
     	if(head===null){
     		head = node;
