@@ -41,12 +41,50 @@ function Set(){
     	}
     	return unionSet;
     }
-}
+    this.interSection = function(otherSet){
+    	var interSectionSet = new Set();
+    	var values = this.values();
+    	for(var i = 0;i<values.length;i++){
+    		if(otherSet.has(values[i])){
+    			interSectionSet.add(values[i]);
+    		}
+    	}
+
+    	return interSectionSet;
+    }
+    this.difference = function(otherSet){
+    	var differenceSet = new Set();
+    	var values = this.values();
+    	for(var i = 0;i<values.length;i++){
+    		if(!otherSet.has(values[i])){
+    			differenceSet.add(values[i]);
+    		}
+    	}
+    	return differenceSet;
+    };
+    this.subSet = function(otherSet){ //验证当前集合是不是某个集合的子集
+    	if(this.size() > otherSet.size()){
+    		return false;
+    	}else{
+    		var values = this.values();
+    		for(var i = 0; i<values.length;i++){
+    			if(!otherSet.has(values[i])){
+    				return false;
+    			}
+    		}
+    	}
+    	return true;
+    }
+};
 
 var setA = new Set();
 setA.add(1);
 setA.add(2);
 var setB= new Set();
+setB.add(2);
 setB.add(3);
 setB.add(4);
 var unionAB = setA.union(setB);
+var intersectionAB = setA.interSection(setB); 
+var differenceAB = setA.difference(setB);
+var intersectionAB_is_sunSet_of_unionAB = intersectionAB.subSet(unionAB);
