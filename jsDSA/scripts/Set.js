@@ -1,4 +1,4 @@
-function Set(){
+function Set(){ //集合
 	var items = {};
 	// this.has = function(value){
 	// 	return value in items;
