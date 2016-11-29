@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>star</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#canvas{
+			width: 1200px;
+			height: 800px;
+			display: block;
+			margin: 0 auto;
+			border: 1px solid red;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var canvas = document.getElementById("canvas");
+		    var context = canvas.getContext("2d");
+			canvas.width = 1200;
+			canvas.height = 800;
+            
+            var skyStyle = context.createRadialGradient(
+            	canvas.width/2,canvas.height,0,
+            	canvas.width/2,canvas.height,canvas.height);
+            skyStyle.addColorStop(0.0,"#035")
+            skyStyle.addColorStop(1.0,"black")
+
+			context.fillStyle = skyStyle;
+			context.fillRect(0,0,canvas.width,canvas.height);
+
+            
+            for(var i =0;i<100;i++){
+               var R =Math.random()*10+5;
+               var x =Math.random()*canvas.width;
+               var y =Math.random()*canvas.height*0.65;
+               var a =Math.random()*360;
+               drawStar(context,R,x,y,a);
+            }
+            // drawStar(context,200,300,400,30);
+
+            fillMoon(context,2,900,200,100,30);
+            drawLand(context);
+		}
+
+		function drawLand(ctx){
+             ctx.save();
+             ctx.beginPath();
+             ctx.moveTo(0,600);
+             ctx.bezierCurveTo(540,400,660,800,1200,600);
+             ctx.lineTo(1200,800);
+             ctx.lineTo(0,800);
+             ctx.closePath();
+
+             var landStyle = ctx.createLinearGradient(0,800,0,0);
+             landStyle.addColorStop(0,'#030');
+             landStyle.addColorStop(1,'#580');
+             ctx.fillStyle = landStyle;
+             
+             ctx.fill();
+
+             ctx.restore();
+		}
+
+		function drawStar(ctx,R,x,y,rot){//实际上每个五角星的中心都在各自的原点处（回想五角星的产生方式，后面的平移是对坐标系的）
+            ctx.save();
+
+
+            ctx.translate(x,y);//这三个值的顺序会影响最终结果
+            ctx.scale(R,R)
+            ctx.rotate(rot/180*Math.PI);
+            
+
+            starPath(ctx);//绘制一个标准路径
+
+            ctx.LineWidth = 3;
+            ctx.lineJoin = "round";
+            ctx.fillStyle = "#fb5";
+            //ctx.strokeStyle = "90E8E2";
+            
+            ctx.fill();
+            //ctx.stroke();
+
+
+            ctx.restore();
+        }
+		function starPath(ctx){
+			ctx.beginPath();
+			//准备好一个标准的R=2r(R=1)的正五角星的路径;
+            for(var  i =0;i<5;i++){
+            	ctx.lineTo(Math.cos((18+i*72)/180*Math.PI),
+            		      -Math.sin((18+i*72)/180*Math.PI));
+            	ctx.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,
+            		      -Math.sin((54+i*72)/180*Math.PI)*0.5);
+            }
+            ctx.closePath();
+            // ctx.LineWidth = 3;
+            // ctx.fillStyle = "#DAD4D4";
+            // ctx.strokeStyle = "90E8E2"
+            // ctx.fill()
+            // ctx.stroke();
+	    }
+
+	    function fillMoon(ctx,d,x,y,R,rot,/*optional*/fillColor){
+	    	ctx.save();
+	    	ctx.translate(x,y);//使圆心相当于位于原点
+            ctx.rotate(rot*Math.PI/180);
+            ctx.scale(R,R);
+            pathMoon(ctx,d);
+            ctx.fillStyle = fillColor||"#fb5";
+            ctx.fill();
+            ctx.restore();
+	    }
+        
+        function pathMoon(ctx,d){
+            ctx.beginPath();
+            ctx.arc(0,0,1,0.5*Math.PI,1.5*Math.PI,true);
+            ctx.moveTo(0,-1);
+            ctx.arcTo(d,0,0,1,dis(0,-1,d,0)/d);
+            ctx.closePath();
+        }
+
+	    function dis(x1,y1,x2,y2){
+             return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+	    }
+	</script>
+</head>
+<body>
+	<canvas id="canvas">
+		
+	</canvas>
+</body>
+</html>

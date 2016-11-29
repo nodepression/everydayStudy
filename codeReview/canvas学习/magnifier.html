@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>magnifier</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#canvas{
+			border:1px solid red;
+			display: block;
+			margin: 0px auto;
+		}
+		#offCanvas{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" >
+		
+	</canvas>
+	<canvas id="offCanvas"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+
+		var offCanvas = document.getElementById("offCanvas");
+		var offContext  = offCanvas.getContext("2d");
+
+		var image = new Image();
+		var isMousedown = false;
+		var scale;
+
+		window.onload=function(){
+			canvas.width = 1200;
+			canvas.height = 675;
+
+			image.src="images/panda.jpg";
+            image.onload = function(){ 
+                offCanvas.width = image.width;
+                offCanvas.height = image.height;
+                scale =  image.width/canvas.width;
+
+            	context.drawImage(image,0,0,canvas.width,canvas.height)
+            	offContext.drawImage(image,0,0);
+            }
+		}
+		function windowToCanvas(x,y){//把窗口上的坐标转化为canvas上的坐标
+            var boundBox = canvas.getBoundingClientRect();
+            return{x:x-boundBox.left,y:y-boundBox.top}
+            
+		}
+		canvas.onmousedown = function(e){
+			e.preventDefault();//禁止掉默认的响应
+			var point = windowToCanvas(e.clientX,e.clientY)
+			console.log(point.x,point.y);
+			isMousedown = true;
+			drawCanvasWithMagnifier(true,point)
+		}
+		canvas.onmousemove = function(e){
+            e.preventDefault();
+            if(isMousedown){
+            	var point = windowToCanvas(e.clientX,e.clientY)
+            	console.log(point.x,point.y);
+            	drawCanvasWithMagnifier(true,point)
+            }
+		}
+		canvas.onmouseup = function(e){
+            e.preventDefault();
+            isMousedown = false;
+            drawCanvasWithMagnifier(false)
+		}
+		canvas.onmouseout = function(e){
+            e.preventDefault();
+            isMousedown = false;
+            drawCanvasWithMagnifier(false)
+		}
+		function drawCanvasWithMagnifier(isMousedown,point){
+			context.clearRect(0,0,canvas.width,canvas.height);
+			context.drawImage(image,0,0,canvas.width,canvas.height)
+			if (isMousedown) {
+                 drawMagnifier(point)
+			}
+		}
+		function drawMagnifier(point){
+			var imageLg_cx = point.x * scale;//大图像对应点击处的横坐标
+			var imageLg_cy = point.y * scale;
+			var mr = 200; //放大镜的半径
+
+			var sx = imageLg_cx - mr;
+			var sy = imageLg_cy - mr;
+
+			var dx = point.x - mr;
+			var dy = point.y - mr;
+
+            context.save();
+            context.lineWidth = 5;
+            context.strokeStyle = "yellow"
+            context.beginPath();
+            context.arc(point.x,point.y,mr,0,Math.PI*2)
+            context.stroke();
+            context.clip();
+
+            context.drawImage(offCanvas,sx,sy,2*mr,2*mr,dx,dy,2*mr,2*mr)
+
+            context.restore();
+
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>watermark</title>
+	<script type="text/javascript" src="script/digit.js"></script>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background-color: black;
+		}
+		#canvas{
+			border:1px solid red;
+			display: block;
+			margin: 0px auto;
+			margin-top: 50px;
+		}
+		#watermark_canvas{
+			display: none;
+			margin: 0 auto;
+			border:1px solid #aaa;
+		}
+		#scale-range{
+			display: block;
+			margin: 20px auto;
+			width: 800px;
+		}
+	</style>
+	
+</head>
+<body>
+	<canvas id="canvas" >
+		
+	</canvas>
+	<canvas id="watermark_canvas">
+		
+	</canvas>
+	<input type="range" id="scale-range" min="0.5" max="3.0" step="0.01" value="1.0">
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		var watermarkCanvas = document.getElementById("watermark_canvas");
+		var watermarkContext = watermarkCanvas.getContext("2d");
+		var slide = document.getElementById("scale-range");
+		var image = new Image();
+		window.onload=function(){
+			canvas.width = 1200;
+			canvas.height = 675;
+
+			var scale = slide.value;
+
+			image.src="images/pic4.jpg";
+            image.onload = function(){
+            	
+            	drawImageByScale(scale);
+
+            	slide.onmousemove = function (){
+            		scale = slide.value;
+            		drawImageByScale(scale);
+            	}
+            }
+            //setup watermark canvas
+            watermarkCanvas.width = 200;
+            watermarkCanvas.height = 40;
+
+            watermarkContext.font = "italic 24px Arial";
+            watermarkContext.fillStyle = "rgba(255,255,255,0.5)"
+            watermarkContext.textBaseline = "middle";
+            watermarkContext.fillText("baibaiqiu.com",20,20);
+		}
+		function drawImageByScale(scale){
+                var imageWidth = 1200*scale;
+                var imageHeight = 675*scale;
+
+                // var sx = (imageWidth - canvas.width)/2;
+                // var sy = (imageHeight - canvas.height)/2;
+
+                // context.drawImage(image,sx,sy,canvas.width,canvas.height,0,0,canvas.width,canvas.height)
+                var dx = (canvas.width - imageWidth)/2;
+                var dy = (canvas.height - imageHeight)/2;
+
+                context.clearRect(0,0,canvas.width,canvas.height)
+                context.drawImage(image,dx,dy,imageWidth,imageHeight);
+                if(scale>=1.0){
+                   context.drawImage(watermarkCanvas,
+                		            canvas.width- watermarkCanvas.width,
+                		            canvas.height- watermarkCanvas.height)
+                }else{
+                   context.drawImage(watermarkCanvas,
+                		       dx+imageWidth- watermarkCanvas.width,
+                		       dy+imageHeight- watermarkCanvas.height)
+                }
+			}	
+	</script>
+</body>
+</html>

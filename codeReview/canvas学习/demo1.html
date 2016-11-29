@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>learnCanvas</title>
+	<style type="text/css">
+		#myCanvas{
+			display: block;
+			margin: 0 auto;
+			border: 5px solid #31c27c;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="1024" height="768"></canvas>
+	<script type="text/javascript">
+	       var canvas = document.getElementById("myCanvas");
+	       var cxt = canvas.getContext("2d");
+
+	       cxt.moveTo(100,100);
+	       cxt.lineTo(600,600);
+
+	       cxt.stroke();
+	       
+	</script>
+</body>
+</html>
